@@ -21,6 +21,19 @@ def print_puzzle(puzzle):
         if i > 1 and i % 2 == 0:
             print(f"{'-'*len(puzzle[i]): >16}")
 
+def get_valid_letters(puzzle_string):
+    """
+    Takes in a puzzle string, extracts all alphabetic characters, 
+    and returns a string of 10 unique letters in order of appearance.
+    """
+    valid_letters = ""
+    for char in puzzle_string:
+        # Check if the character is a letter and not already in our result string
+        if char.isalpha() and char not in valid_letters:
+            valid_letters += char
+            
+    return valid_letters
+    
 def main():
     # The lines below demonstrate what the print_puzzle function outputs.
     puzzle = "RUE,EAR | RUMORS,UEII  ,UKTR ,EAR ,KEOS,KAIK,USA"
@@ -29,6 +42,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
-anjdnsjdbnsd
