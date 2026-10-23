@@ -11,6 +11,7 @@
 # Assignment:   Lab Topic 9 (Team)
 # Date:         19 October 2026
 
+# Main Code
 def print_puzzle(puzzle):
     """ Print puzzle as a long division problem. """
     puzzle = puzzle.split(",")
@@ -21,6 +22,7 @@ def print_puzzle(puzzle):
         if i > 1 and i % 2 == 0:
             print(f"{'-'*len(puzzle[i]): >16}")
 
+# Part A: Hudson
 def get_valid_letters(puzzle_string):
     """
     Takes in a puzzle string, extracts all alphabetic characters, 
@@ -33,7 +35,14 @@ def get_valid_letters(puzzle_string):
             valid_letters += char
             
     return valid_letters
-    
+
+# Part 3: Ben
+def check_user_guess(dividend, quotient, divisor, remainder):
+    if dividend == quotient * divisor + remainder:
+        return True
+    else:
+        return False
+  
 def main():
     # The lines below demonstrate what the print_puzzle function outputs.
     puzzle = "RUE,EAR | RUMORS,UEII  ,UKTR ,EAR ,KEOS,KAIK,USA"
@@ -43,9 +52,4 @@ def main():
 if __name__ == "__main__":
     main()
     
-# Part 3: Check whether the equation is correct
-def check_user_guess(dividend, quotient, divisor, remainder):
-    if dividend == quotient * divisor + remainder:
-        return True
-    else:
-        return False
+
