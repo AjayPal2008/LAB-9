@@ -42,3 +42,10 @@ def main():
 
 if __name__ == "__main__":
     main()
+    
+# Part 3: Check whether the equation is correct
+def check_user_guess(dividend, quotient, divisor, remainder):
+    if dividend == quotient * divisor + remainder:
+        return True
+    else:
+        return False
