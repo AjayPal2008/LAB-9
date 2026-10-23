@@ -22,7 +22,7 @@ def print_puzzle(puzzle):
         if i > 1 and i % 2 == 0:
             print(f"{'-'*len(puzzle[i]): >16}")
 
-# Part A: Hudson
+# Part 1: Hudson
 def get_valid_letters(puzzle_string):
     """
     Takes in a puzzle string, extracts all alphabetic characters, 
