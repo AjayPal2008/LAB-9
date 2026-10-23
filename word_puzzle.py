@@ -36,6 +36,31 @@ def get_valid_letters(puzzle_string):
             
     return valid_letters
 
+#Part 2: Micah
+def is_valid_guess():
+    first_str = valid_letters
+    print(first_str)
+    guess = input("Enter your guess, for example ABCDEFGHIJ: ") 
+    lists = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", 
+            "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", ]
+    myli = list(guess)
+    x = ""
+    y = "1"
+    if len(myli) == 10:
+        for i in range(len(lists)):
+            if lists[i] in myli:
+                if myli.count(lists[i]) > 1:
+                    m = bool(x)
+                    break
+                else:
+                    m = bool(y)
+                    continue
+            else:
+                continue
+    else:
+        print(bool(x), "Hi")
+    return m
+
 # Part 3: Ben
 def check_user_guess(dividend, quotient, divisor, remainder):
     if dividend == quotient * divisor + remainder:
