@@ -2,18 +2,14 @@
 #   "Aggies do not lie, cheat, or steal, or tolerate those who do."
 #   "I have not given or received any unauthorized aid on this assignment."
 #
-# Name:         Hudson Dobbs
-#               Ajay Palanisamy
-#               Micah Kadiri
-#               Benjamin Hatch
-#               Mayu Kotwal
+# Name:         Ajay Palanisamy
 # Section:      508
-# Assignment:   Lab Topic 9 (Team)
-# Date:         19 October 2026
+# Assignment:   Lab 9 team
+# Date:         23 10 2026
 
-# Main Code
 def print_puzzle(puzzle):
     """ Print puzzle as a long division problem. """
+    # Print each row with the division lines aligned on the right.
     puzzle = puzzle.split(",")
     for i in range(len(puzzle)):
         if i == 1:
@@ -22,59 +18,67 @@ def print_puzzle(puzzle):
         if i > 1 and i % 2 == 0:
             print(f"{'-'*len(puzzle[i]): >16}")
 
-# Part 1: Hudson
-def get_valid_letters(puzzle_string):
-    """
-    Takes in a puzzle string, extracts all alphabetic characters, 
-    and returns a string of 10 unique letters in order of appearance.
-    """
-    valid_letters = ""
-    for char in puzzle_string:
-        # Check if the character is a letter and not already in our result string
-        if char.isalpha() and char not in valid_letters:
-            valid_letters += char
-            
-    return valid_letters
+def get_valid_letters(S1):
+    # Keep each puzzle letter once, skipping spaces and punctuation.
+    unique = ""
+    for i in S1:
+        if i in "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz" and i not in unique:
+            unique+=i
+    return unique
 
-#Part 2: Micah
-def is_valid_guess():
-    first_str = valid_letters
-    print(first_str)
-    guess = input("Enter your guess, for example ABCDEFGHIJ: ") 
-    lists = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", 
-            "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", ]
-    myli = list(guess)
-    x = ""
-    y = "1"
-    if len(myli) == 10:
-        for i in range(len(lists)):
-            if lists[i] in myli:
-                if myli.count(lists[i]) > 1:
-                    m = bool(x)
-                    break
-                else:
-                    m = bool(y)
-                    continue
-            else:
-                continue
-    else:
-        print(bool(x), "Hi")
-    return m
-
-# Part 3: Ben
-def check_user_guess(dividend, quotient, divisor, remainder):
-    if dividend == quotient * divisor + remainder:
-        return True
-    else:
+def is_valid_guess(S1,S2):
+    # A guess must use all ten puzzle letters exactly once.
+    if len(S2) != 10:
         return False
-  
+    unique = ""
+    for i in S2:
+        if i not in S1 or i in unique:
+            return False
+        unique+=i
+    for i in S1:
+        if i not in S2:
+            return False
+    return True
+
+def check_user_guess(i1,i2,i3,i4):
+    # Check dividend = quotient * divisor + remainder.
+    if i1 == i2*i3+i4:
+        return True
+    return False
+
+def make_number(S1,S2):
+    # Each letter's position in the guess gives its digit.
+    number = ""
+    for i in S1:
+        number += str(S2.index(i))
+    return (int(number))
+
+def make_numbers(S1,S2):
+    # Extract the dividend, quotient, divisor, and remainder in that order.
+    Arr1 = S1.split(',')
+    Arr2 = Arr1[1].split('|')
+    return (make_number(Arr2[1].strip(),S2),make_number(Arr1[0].strip(),S2),make_number(Arr2[0].strip(),S2),make_number(Arr1[-1].strip(),S2))
+
+
+
 def main():
-    # The lines below demonstrate what the print_puzzle function outputs.
-    puzzle = "RUE,EAR | RUMORS,UEII  ,UKTR ,EAR ,KEOS,KAIK,USA"
+    # Read one puzzle and one guess, then display the result.
+    puzzle_String = input("Enter a word arithmetic puzzle: \n")
+    print_puzzle(puzzle_String)
     print()
-    print_puzzle(puzzle)
+    guess = input("Enter your guess, for example ABCDEFGHIJ: ")
+    unique_letters = get_valid_letters(puzzle_String)
+    if not is_valid_guess(unique_letters,guess):
+        print("Your guess should contain exactly 10 unique letters used in the puzzle.")
+        return
+    tuple1 = make_numbers(puzzle_String,guess)
+    if check_user_guess(tuple1[0],tuple1[1],tuple1[2],tuple1[3]):
+        print("Good job!")
+    else:
+        print("Try again!")
+
 
 if __name__ == "__main__":
     main()
-    
+  
 
